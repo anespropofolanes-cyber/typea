@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type A 主動脈剝離麻醉管理互動教學</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 文青配色系統 - 柔和、典雅 */
+            --bg-main: #f8f6f3;
+            --bg-card: #fffefb;
+            --bg-secondary: #f2ede7;
+            --bg-accent: #e8e3db;
+            
+            /* 主色調 - 墨綠色系 */
+            --primary: #3d5a4c;
+            --primary-light: #5a7a68;
+            --primary-lighter: #d4e0d9;
+            --primary-dark: #2a3f34;
+            
+            /* 輔助色 */
+            --accent: #8b7355;
+            --accent-light: #b39a7d;
+            --accent-bg: #f5f1ec;
+            
+            /* 警示色 - 柔和版本 */
+            --danger: #b85a4f;
+            --danger-bg: #fdf5f4;
+            --danger-border: #e8ccc8;
+            
+            --warning: #c99a5f;
+            --warning-bg: #fdf9f3;
+            --warning-border: #ead8c3;
+            
+            --success: #5a8b73;
+            --success-bg: #f3f8f6;
+            --success-border: #c8e0d5;
+            
+            /* 文字 */
+            --text-primary: #2a2420;
+            --text-secondary: #5a5550;
+            --text-tertiary: #8a857f;
+            --text-muted: #b5b0aa;
+            
+            /* 邊框 */
+            --border: #e0dbd5;
+            --border-strong: #cac5bf;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+
+        /* 紙張質感背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                );
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* Header - 優雅的頂部 */
+        header {
+            text-align: center;
+            margin-bottom: 64px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-family: 'DM Mono', monospace;
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Progress Bar - 簡約風格 */
+        .progress-container {
+            margin: 40px 0;
+            padding: 24px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Cards - 紙張質感 */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(42, 36, 32, 0.04), 
+                        0 1px 2px rgba(42, 36, 32, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(42, 36, 32, 0.08), 
+                        0 2px 4px rgba(42, 36, 32, 0.08);
+            border-color: var(--border-strong);
+        }
+
+        /* Stage Display */
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .stage-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            min-width: 80px;
+            opacity: 0.5;
+        }
+
+        .stage-title {
+            flex: 1;
+        }
+
+        .stage-title h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            letter-spacing: -0.01em;
+        }
+
+        .stage-title p {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* Scenario - 優雅的引用框 */
+        .scenario {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            padding: 28px 32px;
+            border-radius: 4px;
+            margin-bottom: 36px;
+            font-size: 1.0rem;
+            line-height: 1.85;
+            color: var(--text-primary);
+        }
+
+        /* Choices */
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .choice-btn {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 24px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.7;
+        }
+
+        .choice-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+        }
+
+        .choice-btn.correct {
+            border-color: var(--success);
+            background: var(--success-bg);
+            border-width: 2px;
+        }
+
+        .choice-btn.wrong {
+            border-color: var(--danger);
+            background: var(--danger-bg);
+            border-width: 2px;
+        }
+
+        .choice-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .choice-label {
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 24px;
+            padding: 24px 28px;
+            border-radius: 6px;
+            border: 1.5px solid;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--text-primary);
+        }
+
+        .feedback.wrong {
+            background: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--text-primary);
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+        }
+
+        .feedback.correct .feedback-title {
+            color: var(--success);
+        }
+
+        .feedback.wrong .feedback-title {
+            color: var(--danger);
+        }
+
+        /* Key Points */
+        .key-points {
+            background: var(--accent-bg);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            padding: 28px 32px;
+            margin-top: 24px;
+        }
+
+        .key-points h3 {
+            color: var(--primary-dark);
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key-points h4 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            font-weight: 600;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            padding-left: 24px;
+            margin-bottom: 12px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .key-points li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            border: none;
+            border-radius: 6px;
+            padding: 16px 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans TC', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(61, 90, 76, 0.25);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        /* Introduction Screen */
+        .intro-screen {
+            text-align: center;
+        }
+
+        .intro-graphic {
+            margin: 40px 0;
+            padding: 40px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .stanford-classification {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .classification-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: 28px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            border: 1.5px solid var(--border);
+        }
+
+        .classification-item h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .classification-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .aorta-diagram {
+            margin: 40px auto;
+            max-width: 500px;
+        }
+
+        /* Summary Table */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .summary-table th {
+            background: var(--bg-secondary);
+            color: var(--primary-dark);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-strong);
+        }
+
+        .summary-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        .summary-table code {
+            font-family: 'DM Mono', monospace;
+            background: var(--bg-secondary);
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: var(--primary);
+            font-size: 0.85em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 20px;
+            }
+
+            .card {
+                padding: 28px 24px;
+            }
+
+            .stage-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .stage-number {
+                font-size: 2.5rem;
+            }
+
+            .stanford-classification {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            /* 術前準備區塊行動裝置優化 */
+            .intro-screen h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            .intro-screen > div > div {
+                padding: 20px 24px !important;
+            }
+            
+            .intro-screen h4 {
+                font-size: 0.95rem !important;
+            }
+            
+            .intro-screen div[style*="display: flex"] {
+                line-height: 1.8 !important;
+                word-break: break-word !important;
+            }
+            
+            .intro-screen div[style*="display: flex"] span:last-child {
+                flex: 1;
+                min-width: 0;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Completion badge */
+        .completion-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 24px auto;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* SVG icons color */
+        .key-points svg,
+        .completion-badge svg {
+            color: currentColor;
+        }
+
+        /* Alert boxes */
+        .alert-box {
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1.5px solid;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .alert-box.warning {
+            background: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: var(--text-primary);
+        }
+
+        .alert-box.danger {
+            background: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--text-primary);
+        }
+
+        /* Strong emphasis */
+        strong {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Type A 主動脈剝離麻醉管理</h1>
+            <p class="subtitle">STANFORD TYPE A AORTIC DISSECTION ANESTHETIC MANAGEMENT</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-label">
+                <span id="progress-text">準備開始</span>
+                <span id="progress-percent">0/8</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div id="content-area"></div>
+    </div>
+
+    <script>
+        // Game State
+        let currentStage = 0;
+        let score = 0;
+
+        // Stage Data
+        const stages = [
+            // Introduction
+            {
+                type: 'intro',
+                title: '認識 Type A 主動脈剝離',
+                content: `
+                    <div class="intro-screen">
+                        <div class="intro-graphic">
+                            <h2 style="color: var(--accent); margin-bottom: 32px; font-size: 1.5rem; font-weight: 600; text-align: center;">Stanford 分類</h2>
+                            
+                            <div style="display: grid; gap: 32px; margin: 32px 0;">
+                                <div style="padding: 24px 0; border-bottom: 2px solid var(--border);">
+                                    <h3 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;">Type A</h3>
+                                    <p style="color: var(--text-primary); line-height: 1.9; font-size: 1.0rem; margin-bottom: 12px;">
+                                        <strong>涉及升主動脈</strong>（ascending aorta）<br>
+                                        無論剝離是否延伸至主動脈弓或降主動脈，只要牽涉升主動脈即為 Type A
+                                    </p>
+                                    <p style="color: var(--danger); line-height: 1.8; font-size: 0.95rem; margin-top: 12px;">
+                                        需緊急手術 | 未治療死亡率：1-2%/小時
+                                    </p>
+                                </div>
+                                
+                                <div style="padding: 24px 0;">
+                                    <h3 style="color: var(--warning); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;">Type B</h3>
+                                    <p style="color: var(--text-primary); line-height: 1.9; font-size: 1.0rem; margin-bottom: 12px;">
+                                        <strong>僅涉及降主動脈</strong>（descending aorta）<br>
+                                        剝離起始於左鎖骨下動脈遠端，未涉及升主動脈
+                                    </p>
+                                    <p style="color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; margin-top: 12px;">
+                                        通常採藥物治療控制血壓，穩定後評估是否需手術或 TEVAR
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 32px; padding: 20px 0; border-top: 2px solid var(--border); margin-bottom: 40px;">
+                                <p style="color: var(--text-secondary); line-height: 1.8; font-size: 0.93rem; text-align: center;">
+                                    <strong style="color: var(--primary-dark);">關鍵區分：</strong>升主動脈是否受累
+                                </p>
+                            </div>
+                            
+
+                            <div style="margin-top: 40px;">
+                                <h3 style="color: var(--primary-dark); margin-bottom: 28px; font-size: 1.3rem; font-weight: 600; display: flex; align-items: center; gap: 12px;">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    術前準備 Checklist
+                                </h3>
+                                
+                                <!-- 監測設備準備 -->
+                                <details class="checklist-card" style="margin-bottom: 20px;">
+                                    <summary style="padding: 16px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.05rem; color: var(--primary); user-select: none; border-bottom: 2px solid var(--border);">
+                                        <span>監測設備準備</span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="transition: transform 0.3s;">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </summary>
+                                    <div style="padding: 16px 0 8px 0; display: grid; gap: 12px; font-size: 0.95rem; line-height: 1.8; color: var(--text-primary); text-align: left; text-align: left;">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--accent); flex-shrink: 0;">•</span>
+                                            <span>Arterial line kit ×2（考慮雙側上肢，20G radial）</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--accent); flex-shrink: 0;">•</span>
+                                            <span>CVP kit（Triple lumen 或 Cordis introducer 8.5Fr）</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--accent); flex-shrink: 0;">•</span>
+                                            <span>TEE probe + 消毒套組</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--accent); flex-shrink: 0;">•</span>
+                                            <span>5-lead ECG + Defibrillator pads</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--accent); flex-shrink: 0;">•</span>
+                                            <span>Temperature probe, NIRS monitor</span>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- 藥物準備 -->
+                                <details class="checklist-card" style="margin-bottom: 20px;">
+                                    <summary style="padding: 16px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.05rem; color: var(--warning); user-select: none; border-bottom: 2px solid var(--border);">
+                                        <span>藥物準備</span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="transition: transform 0.3s;">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </summary>
+                                    <div style="padding: 16px 0 8px 0; display: grid; gap: 12px; font-size: 0.95rem; line-height: 1.8; color: var(--text-primary); text-align: left;">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--warning); flex-shrink: 0;">•</span>
+                                            <span><strong>血流動力學：</strong>Labetalol、Esmolol、Nicardipine、Morphine/Fentanyl</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--warning); flex-shrink: 0;">•</span>
+                                            <span><strong>誘導：</strong>Fentanyl 500 mcg、Etomidate 40 mg、Rocuronium 100 mg</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--warning); flex-shrink: 0;">•</span>
+                                            <span><strong>插管前：</strong>Esmolol 100 mg、Lidocaine 100 mg</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--warning); flex-shrink: 0;">•</span>
+                                            <span><strong>急救：</strong>Phenylephrine、Ephedrine、Nitroglycerin、Epinephrine</span>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- 輸血準備 -->
+                                <details class="checklist-card" style="margin-bottom: 20px;">
+                                    <summary style="padding: 16px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.05rem; color: var(--danger); user-select: none; border-bottom: 2px solid var(--border);">
+                                        <span>輸血準備</span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="transition: transform 0.3s;">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </summary>
+                                    <div style="padding: 16px 0 8px 0; display: grid; gap: 12px; font-size: 0.95rem; line-height: 1.8; color: var(--text-primary); text-align: left;">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--danger); flex-shrink: 0;">•</span>
+                                            <span>RBC 10 units、FFP 10 units、Platelet 10 units</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--danger); flex-shrink: 0;">•</span>
+                                            <span>Cryoprecipitate 20 units 或 Fibrinogen concentrate</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--danger); flex-shrink: 0;">•</span>
+                                            <span>Rapid infuser + Blood warmer</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--danger); flex-shrink: 0;">•</span>
+                                            <span>ACT machine + TEG/ROTEM</span>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- 團隊溝通 -->
+                                <details class="checklist-card" style="margin-bottom: 32px;">
+                                    <summary style="padding: 16px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.05rem; color: var(--success); user-select: none; border-bottom: 2px solid var(--border);">
+                                        <span>團隊溝通</span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="transition: transform 0.3s;">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </summary>
+                                    <div style="padding: 16px 0 8px 0; display: grid; gap: 12px; font-size: 0.95rem; line-height: 1.8; color: var(--text-primary); text-align: left;">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--success); flex-shrink: 0;">•</span>
+                                            <span>外科：確認手術計畫（root? hemi-arch? total arch?）</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--success); flex-shrink: 0;">•</span>
+                                            <span>灌流師：CPB circuit ready、ACP cannulae 備妥</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--success); flex-shrink: 0;">•</span>
+                                            <span>護理師：Protamine、止血藥物、Cell saver</span>
+                                        </div>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <span style="color: var(--success); flex-shrink: 0;">•</span>
+                                            <span>ICU：床位、呼吸器、IABP/ECMO 待命</span>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <div style="margin-top: 32px; padding: 20px 0; border-top: 2px solid var(--border);">
+                                    <p style="color: var(--primary-dark); font-weight: 600; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 1.0rem;">
+                                        <svg style="flex-shrink: 0; margin-top: 2px;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M10 6V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M10 14H10.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                        <span>記住：準備充分 = 從容應對</span>
+                                    </p>
+                                    <p style="font-size: 0.93rem; line-height: 1.75; color: var(--text-primary); padding-left: 30px;">Type A 主動脈剝離是時間壓力下的高難度手術，但只要<strong>事前準備齊全</strong>、<strong>團隊溝通順暢</strong>、<strong>掌握關鍵步驟</strong>，就能大幅降低併發症。</p>
+                                </div>
+                            </div>
+                            
+                            <style>
+                                /* Details arrow rotation animation */
+                                details[open] > summary svg {
+                                    transform: rotate(180deg);
+                                }
+                                
+                                /* Smooth animation for details content */
+                                details summary::-webkit-details-marker {
+                                    display: none;
+                                }
+                                
+                                details > summary:hover {
+                                    opacity: 0.7;
+                                }
+                                
+                                @media (max-width: 768px) {
+                                    details > summary {
+                                        padding: 14px 0 !important;
+                                        font-size: 1.0rem !important;
+                                    }
+                                    
+                                    details > div {
+                                        padding: 12px 0 8px 0 !important;
+                                        gap: 10px !important;
+                                        font-size: 0.9rem !important;
+                                    }
+                                }
+                            </style>
+                            </div>
+
+                            <div style="margin-top: 40px;">
+                                <h3 style="color: var(--primary-dark); margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                                    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    學習目標
+                                </h3>
+                                <ul style="list-style: none; padding-left: 0; line-height: 1.9; font-size: 0.95rem; color: var(--text-primary);">
+                                    <li style="padding-left: 24px; position: relative; margin-bottom: 10px;">
+                                        <span style="position: absolute; left: 0; color: var(--accent);">—</span>
+                                        掌握 Type A 主動脈剝離麻醉管理的八個關鍵步驟
+                                    </li>
+                                    <li style="padding-left: 24px; position: relative; margin-bottom: 10px;">
+                                        <span style="position: absolute; left: 0; color: var(--accent);">—</span>
+                                        理解每個步驟的目標、注意事項與常見陷阱
+                                    </li>
+                                    <li style="padding-left: 24px; position: relative; margin-bottom: 10px;">
+                                        <span style="position: absolute; left: 0; color: var(--accent);">—</span>
+                                        建立系統性的臨床決策思維
+                                    </li>
+                                    <li style="padding-left: 24px; position: relative; margin-bottom: 10px;">
+                                        <span style="position: absolute; left: 0; color: var(--accent);">—</span>
+                                        識別危險情境並做出正確處置
+                                    </li>
+                                    <li style="padding-left: 24px; position: relative; margin-bottom: 10px;">
+                                        <span style="position: absolute; left: 0; color: var(--accent);">—</span>
+                                        學會術前準備 checklist，避免臨場慌亂
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <button class="btn" onclick="nextStage()">開始學習</button>
+                        </div>
+                    </div>
+                `
+            },
+
+            // Stage 1: Pre-operative Assessment
+            {
+                number: 1,
+                title: '術前評估與穩定',
+                subtitle: 'Pre-operative Assessment and Stabilization',
+                scenario: '一位 58 歲男性因劇烈撕裂性胸痛送至急診，疼痛放射至背部。CT 確診 Stanford Type A 主動脈剝離，撕裂口位於升主動脈。患者血壓 180/100 mmHg（雙側上肢血壓對稱），心率 110 次/分，呼吸急促，焦慮不安。心電圖顯示竇性心搏過速，無 ST 變化。胸部 X 光顯示縱膈腔擴大。外科團隊已通知準備緊急手術，預計 30 分鐘內進 OR。您作為麻醉護理師，首要處置是什麼？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '立即給予 Nicardipine 降血壓至 120/80 mmHg',
+                        correct: false,
+                        feedback: '錯誤！錯誤！單獨使用血管擴張劑會導致反射性心搏過速，反而增加主動脈壁應力（dP/dt↑）。Type A 剝離的血流動力學控制原則是：<strong>先控制心率，再降血壓</strong>。'
+                    },
+                    {
+                        label: 'B',
+                        text: '先給予 Labetalol 控制心率至 <60 次/分，再降血壓至 100-120 mmHg',
+                        correct: true,
+                        feedback: '正確！正確！Labetalol 兼具 α/β 阻斷作用（α:β = 1:7），是首選藥物。生理機制：<br><br><strong>為什麼先降心率？</strong><br>• dP/dt（壓力上升速率）= 心肌收縮力 × 心率<br>• 心率是主動脈壁應力的主要決定因素<br>• β 阻斷降低 dP/dt → 減少主動脈壁剪切力<br><br><strong>血流動力學目標：</strong><br>• 心率 <60 bpm（理想 50-60）<br>• 收縮壓 100-120 mmHg<br>• MAP >60 mmHg（維持器官灌注）<br><br><strong>藥物選擇：</strong><br>• Labetalol 4-8 mg IV bolus q10min，或 infusion 2-8 mg/min<br>• 備案：Esmolol (ultra-short acting β blocker) + Nicardipine<br>• 若有氣喘病史：可考慮 Diltiazem'
+                    },
+                    {
+                        label: 'C',
+                        text: '給予大劑量 Morphine 止痛，觀察血壓變化',
+                        correct: false,
+                        feedback: '錯誤！不完整！雖然鴉片類止痛可降低交感神經活性，但單獨使用不足以達成血流動力學目標。必須同時使用 β 阻斷劑控制心率和血壓。'
+                    },
+                    {
+                        label: 'D',
+                        text: '立即插管，用麻醉藥物控制血壓',
+                        correct: false,
+                        feedback: '錯誤！過於激進！術前應先穩定血流動力學，插管時的血壓波動可能導致主動脈破裂。應在充分控制心率和血壓後，才進行誘導插管。'
+                    }
+                ],
+                keyPoints: [
+                    '緊急血流動力學控制：降低主動脈壁應力，防止剝離延伸或破裂',
+                    '目標：收縮壓 100-120 mmHg，心率 <60 次/分，MAP >60 mmHg',
+                    '先控制心率，再降血壓（避免反射性心搏過速增加 dP/dt）',
+                    'β 阻斷劑優先：Labetalol（α:β = 1:7）、Esmolol + Nicardipine',
+                    '鴉片類止痛：Morphine 或 Fentanyl，減少交感神經活性',
+                    '未治療的 Type A 剝離死亡率：1-2%/小時，48小時內50%',
+                    '特殊情境：急性 AI 時β阻斷劑謹慎使用（會阻斷代償性心搏過速）',
+                    '監測雙側上肢血壓差異：>20 mmHg 提示主動脈弓分支受累'
+                ]
+            },
+
+            // Stage 2: Monitoring Establishment
+            {
+                number: 2,
+                title: '監測建立',
+                subtitle: 'Monitoring Establishment',
+                scenario: '患者血流動力學已穩定（BP 110/70 mmHg, HR 55 bpm, 疼痛改善）。準備建立監測設備時，您注意到患者右上肢血壓明顯低於左上肢（右 90/60 vs 左 110/70 mmHg）。初步 TEE 快掃顯示：升主動脈明顯擴大（直徑 5.5 cm），主動脈瓣三葉且形態正常，左心室收縮功能良好（EF ~60%），無明顯心包積液。接下來監測設備建立策略為何？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '在右手建立動脈導管（血壓較低側），方便觀察血壓變化',
+                        correct: false,
+                        feedback: '錯誤！錯誤！血壓較低側可能代表該側主動脈弓分支受累（innominate artery 或 subclavian artery）。<br><br><strong>為什麼不能選低壓側？</strong><br>• 低壓側反映的是<strong>周邊灌注壓</strong>，不是中樞主動脈壓<br>• 可能低估真實血壓 → 術中血壓控制不足<br>• 術中需要準確的<strong>中樞血壓</strong>監測<br><br><strong>正確做法：</strong><br>選擇血壓<strong>較高側</strong>建立動脈導管，才能準確反映中樞血壓和腦灌注壓。'
+                    },
+                    {
+                        label: 'B',
+                        text: '在左手建立動脈導管，並持續監測雙側上肢血壓差異，必要時放置第二條動脈導管',
+                        correct: true,
+                        feedback: '正確！正確！完整的監測策略應包括：<br><br><strong>1. 動脈導管放置原則：</strong><br>• 選擇血壓較高側（左側 110/70）<br>• 反映中樞主動脈壓和腦灌注壓<br>• Radial artery 首選（20G 導管）<br><br><strong>2. 雙側血壓監測重要性：</strong><br>• 血壓差 >20 mmHg：提示弓部分支受累<br>• 右側低壓：可能 innominate a. 受累<br>• 左側低壓：可能 left subclavian a. 受累<br>• 影響術中腦灌注策略（ACP 的動脈選擇）<br><br><strong>3. 第二條動脈導管適應症：</strong><br>• 預計需要 ACP（bilateral ACP 需監測雙側壓力）<br>• 一側導管功能不良<br>• 術中需精確比對雙側血壓<br><br><strong>4. 完整監測建立：</strong><br>• Arterial line（高壓側）<br>• CVP（評估容積狀態、藥物給予）<br>• TEE（持續監測，避免過度操作）<br>• 5-lead ECG + pulse oximetry'
+                    },
+                    {
+                        label: 'C',
+                        text: '改用股動脈建立動脈導管',
+                        correct: false,
+                        feedback: '錯誤！次佳選擇！股動脈雖可使用，但無法評估主動脈弓分支受累情況。上肢動脈導管可提供更多臨床資訊（腦灌注評估）。'
+                    },
+                    {
+                        label: 'D',
+                        text: '暫不建立動脈導管，用 NIBP 監測即可',
+                        correct: false,
+                        feedback: '錯誤！錯誤！Type A 剝離需要<strong>持續、即時</strong>的血壓監測。手術中血流動力學變化快速，NIBP 無法提供足夠的監測頻率。動脈導管是必要的。'
+                    }
+                ],
+                keyPoints: [
+                    '動脈導管：選擇血壓較高側，反映中樞血壓和腦灌注壓',
+                    '雙側血壓差 >20 mmHg：提示主動脈弓分支受累，影響腦灌注策略',
+                    'TEE 為 Category I 適應症：術前快速評估、術中持續監測',
+                    '真假腔辨識要點：真腔較小、收縮期血流速度快、收縮期擴張；假腔較大、spontaneous echo contrast、易血栓形成',
+                    'TEE 評估重點：(1) 撕裂口位置和大小 (2) 剝離範圍 (3) 主動脈瓣功能 (4) 心包積液 (5) LV function (6) 冠狀動脈口',
+                    '心包填塞徵象：心包積液 + RA/RV collapse + IVC plethora，若積液內有血塊 → 即將破裂，立即通知外科',
+                    'TEE 操作注意：避免過度推進或旋轉探頭（可能造成主動脈破裂），gentle manipulation',
+                    '完整監測：arterial line + CVP + TEE + 5-lead ECG + pulse ox + temperature + UO'
+                ]
+            },
+
+            // Stage 3: Anesthetic Induction
+            {
+                number: 3,
+                title: '麻醉誘導',
+                subtitle: 'Anesthetic Induction',
+                scenario: '監測設備已建立完成，外科團隊已刷手待命。您準備進行麻醉誘導。患者目前血壓 105/65 mmHg，心率 58 次/分。TEE 已就位，顯示輕度主動脈瓣逆流但無心包積液。以下哪種誘導策略最適當？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '標準 Fentanyl + Propofol 誘導，插管後給予 Rocuronium',
+                        correct: false,
+                        feedback: '錯誤！風險過高！Propofol 會造成血壓下降，而插管反應可能導致血壓飆升。這種劇烈波動在 Type A 剝離是最危險的時刻，可能導致主動脈破裂。'
+                    },
+                    {
+                        label: 'B',
+                        text: '高劑量 Fentanyl (10-15 mcg/kg) + Etomidate (0.2-0.3 mg/kg) + Rocuronium (1.0 mg/kg)，插管前 1-2 分鐘給予 Esmolol (0.5-1.0 mg/kg) 或 Lidocaine (1.5 mg/kg)',
+                        correct: true,
+                        feedback: '正確！正確！這是 Type A 剝離最推薦的<strong>平穩誘導策略</strong>：<br><br><strong>藥物選擇理由：</strong><br><br>1. <strong>Fentanyl 10-15 mcg/kg（高劑量）</strong><br>• 深度鈍化插管反應<br>• 緩慢給予（over 3-5 min）避免胸壁僵硬<br>• 可用 Sufentanil (1-2 mcg/kg) 或 Remifentanil (1 mcg/kg bolus + infusion) 替代<br><br>2. <strong>Etomidate 0.2-0.3 mg/kg</strong><br>• 血流動力學最穩定的誘導藥<br>• 不降血壓、不影響心肌收縮力<br>• 缺點：術後腎上腺抑制（單次劑量通常不重要）<br><br>3. <strong>Rocuronium 1.0 mg/kg（快速誘導劑量）</strong><br>• 快速達成深度肌鬆（60-90秒）<br>• 避免插管時 bucking 或 coughing → 血壓飆升<br>• 備案：Succinylcholine 1.5 mg/kg（若無禁忌症）<br><br>4. <strong>插管前預防用藥（重要！）</strong><br>• Esmolol 0.5-1.0 mg/kg IV（插管前 1-2 min）：短效β阻斷劑，直接降低插管反應<br>• Lidocaine 1.5 mg/kg IV（插管前 2-3 min）：抑制氣道反射<br>• 兩者可合併使用<br><br><strong>誘導時序（critical timing）：</strong><br>T-5 min：開始給 Fentanyl（緩慢 over 3-5 min）<br>T-3 min：Lidocaine 1.5 mg/kg<br>T-2 min：Esmolol 0.5-1.0 mg/kg<br>T-1 min：Etomidate 0.2-0.3 mg/kg<br>T-0.5 min：Rocuronium 1.0 mg/kg<br>T+1 min：確認深度肌鬆，gentle laryngoscopy，插管<br><br><strong>插管技巧：</strong><br>• Video laryngoscope（減少刺激）<br>• Gentle manipulation（避免多次嘗試）<br>• 術者熟練（一次成功）<br>• 備妥困難插管設備'
+                    },
+                    {
+                        label: 'C',
+                        text: 'Ketamine + Rocuronium 快速誘導',
+                        correct: false,
+                        feedback: '錯誤！禁忌！Ketamine 會增加交感神經活性，導致血壓和心率上升，增加主動脈壁應力。Type A 剝離應避免使用。'
+                    },
+                    {
+                        label: 'D',
+                        text: 'Sevoflurane 吸入誘導',
+                        correct: false,
+                        feedback: '錯誤！不適合！吸入誘導速度慢且難以精確控制血流動力學。Type A 剝離需要快速、可控、平穩的靜脈誘導。'
+                    }
+                ],
+                keyPoints: [
+                    '最危險時刻：誘導和插管時血壓劇烈波動可能導致主動脈破裂或剝離延伸',
+                    '血流動力學目標：誘導中維持 SBP 100-120 mmHg、HR <60 bpm、避免 >20% 波動',
+                    '誘導藥物組合：高劑量鴉片類 + Etomidate + 快速肌鬆劑',
+                    '預防插管反應（critical）：Esmolol 0.5-1 mg/kg 或 Lidocaine 1.5 mg/kg，插管前 1-3 分鐘給予',
+                    '誘導時序很重要：分段給藥，Fentanyl 緩慢給予避免胸壁僵硬，確認深度肌鬆再插管',
+                    '插管技巧：video laryngoscope、gentle、一次成功（避免多次嘗試刺激）',
+                    '備妥急救藥物：Esmolol、Nicardipine、Nitroglycerin、Phenylephrine（四種都要 ready）',
+                    '外科團隊 scrubbed and ready：誘導前外科應已刷手待命，隨時準備緊急開胸（若主動脈破裂）'
+                ]
+            },
+
+            // Stage 4: CPB and Cerebral Protection
+            {
+                number: 4,
+                title: '體外循環建立與腦保護',
+                subtitle: 'CPB Initiation and Cerebral Protection',
+                scenario: '麻醉誘導順利，患者已插管且血流動力學穩定（BP 108/65, HR 58）。外科已開胸，術中 TEE 顯示：撕裂口位於升主動脈近端（距主動脈瓣環 2 cm），剝離延伸至主動脈弓並涉及 innominate artery 起始部，降主動脈也有剝離但無明顯撕裂口。主動脈瓣三葉，輕度逆流（mild AI, PHT 450 ms）。外科計畫進行 ascending aorta + hemi-arch 置換，預計需要循環停止約 35-40 分鐘進行遠端吻合。以下哪種腦保護策略最適當？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '深低溫循環停止（DHCA, 18°C）單獨使用',
+                        correct: false,
+                        feedback: '錯誤！不建議！現代指引不建議單獨使用 DHCA。循環停止 >30 分鐘時，應合併順行性腦灌注（ACP）或逆行性腦灌注（RCP）以改善神經預後。'
+                    },
+                    {
+                        label: 'B',
+                        text: '中度低溫（26-28°C）+ 雙側順行性腦灌注（Bilateral ACP）',
+                        correct: true,
+                        feedback: '正確！正確！這是目前國際指引推薦的<strong>最佳腦保護策略</strong>：<br><br><strong>1. 為什麼選擇中度低溫？</strong><br><br><strong>深低溫（DHCA 20°C）的問題：</strong><br>• 延長 CPB 時間（降溫和復溫各需 20-30 min）<br>• 增加凝血功能障礙（低溫活化纖溶系統）<br>• 增加術後出血和輸血需求<br>• 器官功能恢復較慢<br><br><strong>中度低溫（26-28°C）的優勢：</strong><br>• 降溫/復溫時間短（各 10-15 min）<br>• 凝血功能影響較小<br>• 配合 ACP 可提供充分腦保護<br>• 安全循環停止時間：可達 40-50 分鐘<br><br><strong>2. 為什麼選擇雙側 ACP？</strong><br><br><strong>腦灌注生理學：</strong><br>• 單側 ACP：經右側（innominate a.）灌注，依賴 Circle of Willis 交通支供應左腦<br>• 問題：30-40% 人口 Circle of Willis 不完整<br>• 雙側 ACP：同時灌注雙側頸動脈 → 直接供應雙側大腦半球<br><br><strong>循環停止時間決策：</strong><br>• 20 min：單側 ACP 即可<br>• 20-40 min：單側或雙側 ACP 皆可，雙側可能更安全<br>• 40 min：<strong>強烈建議雙側 ACP</strong><br>• 50 min：考慮改變手術策略<br><br><strong>ACP 灌注參數（重要！）：</strong><br>• <strong>流量：</strong> 10-15 mL/kg/min（成人約 800-1000 mL/min bilateral）<br>• <strong>灌注壓：</strong> 50-80 mmHg（radial artery pressure）<br>• <strong>溫度：</strong> 26-28°C (nasopharyngeal or tympanic)<br>• <strong>監測：</strong> Bilateral NIRS（腦氧飽和度），目標 50-60%<br><br><strong>3. 動脈插管策略：</strong><br><br><strong>腋動脈（Axillary artery）插管為首選：</strong><br>• 優勢：直接灌注真腔、可用於 ACP、降低中風風險<br>• 通常選右側（除非右側血壓明顯較低）<br>• 8 mm graft 縫合於腋動脈，減少血管損傷<br>• TEE 或 epivascular ultrasound 確認進入真腔<br><br><strong>避免股動脈插管（除非必要）：</strong><br>• 可能逆行灌注假腔<br>• Malperfusion 風險高<br>• 周邊動脈栓塞風險<br><br><strong>4. pH 管理策略：</strong><br>• α-stat：成人首選（在低溫下維持 pH 7.4 uncorrected）<br>• pH-stat：兒童或特殊情況'
+                    },
+                    {
+                        label: 'C',
+                        text: '常溫體外循環 + 逆行性腦灌注（RCP）',
+                        correct: false,
+                        feedback: '錯誤！不適當！常溫下無法安全停止循環。RCP 單獨使用時灌注效果不如 ACP。應使用中度低溫 + ACP 的組合。'
+                    },
+                    {
+                        label: 'D',
+                        text: '深低溫（18°C）+ 單側順行性腦灌注',
+                        correct: false,
+                        feedback: '錯誤！次佳選擇！深低溫會增加凝血功能障礙和體外循環時間。循環停止 40 分鐘應考慮雙側 ACP。中度低溫 + 雙側 ACP 是更好的選擇。'
+                    }
+                ],
+                keyPoints: [
+                    '動脈插管策略：腋動脈（首選）> 股動脈，TEE/epivascular US 確認真腔',
+                    '低溫管理：中度低溫 26-28°C（現代趨勢），降溫/復溫各 10-15 分鐘',
+                    '腦保護技術：順行性腦灌注 ACP（首選）或逆行性腦灌注 RCP',
+                    'DHCA 單獨使用不建議：應合併 ACP 或 RCP，單獨 DHCA 安全時間 <20 min',
+                    'ACP 參數：流量 10-15 mL/kg/min、灌注壓 50-80 mmHg、bilateral NIRS >50-60%',
+                    '循環停止時間與腦保護：<20 min 單側 ACP、20-40 min 單側或雙側、>40 min 強烈建議雙側 ACP',
+                    'pH 管理：成人使用 α-stat（pH 7.4 uncorrected at 37°C）',
+                    'CPB 監測：ACT >480 sec、Hb 7-9 g/dL、pump flow 2.2-2.4 L/min/m²、MAP 50-80 mmHg、mixed venous O₂ sat >65%'
+                ]
+            },
+
+            // Stage 5: Intraoperative Management
+            {
+                number: 5,
+                title: '手術期間管理',
+                subtitle: 'Intraoperative Management',
+                scenario: '體外循環已建立（腋動脈插管成功，CPB flow 2.4 L/min/m², MAP 65 mmHg）。降溫進行中，目標溫度 27°C。TEE 監測顯示：CPB 開始後真腔血流良好，但 15 分鐘後，您注意到以下變化：<br><br><strong>新發現：</strong><br>• TEE 顯示 inferior wall 新發生 hypokinesis（術前該區域正常）<br>• Mixed venous O₂ saturation (SvO₂) 從 75% 下降至 58%<br>• 尿量突然減少（從 100 mL/hr → 20 mL/hr）<br>• Lactate 從 1.2 → 2.8 mmol/L<br>• MAP 穩定 65 mmHg、Pump flow 正常<br><br>外科表示手術視野正常，主動脈已 cross-clamped。您應該如何處理？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '這些變化是 CPB 的正常反應（低溫、稀釋），繼續觀察即可',
+                        correct: false,
+                        feedback: '錯誤！危險的誤判！這些變化<strong>不是</strong> CPB 的正常反應：<br><br><strong>為什麼這不正常？</strong><br><br>1. <strong>新發區域壁運動異常</strong><br>• 術前該區域正常 → CPB 後出現 → 提示急性缺血<br>• 可能原因：冠狀動脈受累、心肌灌注不足、插管位置問題<br><br>2. <strong>SvO₂ 急劇下降（75% → 58%）</strong><br>• SvO₂ = 組織氧供需平衡指標<br>• 正常 CPB：SvO₂ 應維持 >65-70%<br>• 下降至 58% → 組織灌注不足或氧耗增加<br><br>3. <strong>尿量驟減 + Lactate 升高</strong><br>• 腎灌注不足徵象<br>• Lactate 升高 → 組織缺氧、無氧代謝<br>• 提示<strong>全身性灌注不良</strong><br><br><strong>組合起來的意義：</strong><br>這四個徵象同時出現 → <strong>嚴重警訊</strong>，提示：<br>• CPB 灌流問題（可能插管進入假腔）<br>• 主動脈剝離延伸至冠狀動脈或其他重要分支<br>• Malperfusion syndrome<br><br>必須<strong>立即</strong>處理，絕不能「繼續觀察」！'
+                    },
+                    {
+                        label: 'B',
+                        text: '立即通知外科和灌流師，TEE 確認動脈插管位置（真腔 vs 假腔），檢查 CPB circuit，評估是否需要調整插管或灌注策略',
+                        correct: true,
+                        feedback: '正確！正確！這是標準的<strong>系統性問題排查</strong>流程：<br><br><strong>Step 1: 立即通知團隊（Time-critical communication）</strong><br>• 外科醫師：可能需要調整插管位置或手術策略<br>• 灌流師：檢查 pump、oxygenator、管路<br>• 團隊必須<strong>同時</strong>行動，不要單打獨鬥<br><br><strong>Step 2: TEE 快速確認（Most likely culprit）</strong><br><br><strong>檢查動脈插管位置：</strong><br>• Mid-esophageal level：觀察 descending aorta<br>• 真腔特徵：較小、收縮期擴張、高速血流<br>• 假腔特徵：較大、可能有 spontaneous echo contrast、血流緩慢<br>• <strong>Critical finding：</strong>若插管在假腔 → 假腔血流充盈但真腔塌陷 → 器官灌注不足<br><br><strong>評估冠狀動脈：</strong><br>• Short-axis view at aortic valve level<br>• 觀察 RCA 和 LCA ostium<br>• 剝離是否延伸至冠狀動脈口？<br><br><strong>評估心臟功能：</strong><br>• Inferior wall hypokinesis → 可能 RCA 受累<br>• 其他區域壁運動？<br>• LV filling（preload）是否足夠？<br><br><strong>Step 3: CPB Circuit 檢查（Perfusionist role）</strong><br>• Pump flow adequate?（應該 2.2-2.4 L/min/m²）<br>• Arterial line pressure?（應該 200-300 mmHg at cannula）<br>• Venous return adequate?（reservoir level）<br>• Oxygenator function?（outlet PO₂, PCO₂）<br>• 管路是否扭結、氣泡？<br><br><strong>Step 4: 根據發現調整策略</strong><br><br><strong>情境 A：插管在假腔（最常見）</strong><br>• <strong>立即處理：</strong>外科調整插管位置或改換插管部位<br>• 考慮額外插管（femoral artery）提供真腔灌注<br>• TEE 導引確認新插管位置正確<br><br><strong>情境 B：冠狀動脈受累</strong><br>• 通知外科考慮 coronary reimplantation 或 CABG<br>• 增加心肌保護措施（cardioplegia）<br>• 準備 inotropic support<br><br><strong>情境 C：全身灌注不足</strong><br>• 增加 pump flow（在安全範圍內）<br>• 提高 MAP 目標（70-80 mmHg）<br>• 檢查 Hb（目標 7-9 g/dL on CPB）<br><br><strong>情境 D：其他器官 malperfusion</strong><br>• Renal：維持 MAP、確保尿量、考慮利尿劑<br>• Mesenteric：監測 lactate、腹部理學檢查（術後）<br>• Spinal：維持灌注壓、避免低溫過度<br><br><strong>Step 5: 持續監測效果</strong><br>• TEE：壁運動改善？真腔血流？<br>• SvO₂：回升至 >65%？<br>• Lactate：趨勢下降？<br>• 尿量：恢復至 >0.5 mL/kg/hr？<br><br><strong>臨床 Pearl：</strong><br>Type A dissection + CPB 後新發灌注不良 → <strong>First think: 插管位置</strong><br>• 最常見原因<br>• 最容易修正<br>• 修正後效果最明顯<br>• 但要快速確認診斷，延誤會導致不可逆器官損傷'
+                    },
+                    {
+                        label: 'C',
+                        text: '增加 CPB flow 至最大（3.0 L/min/m²）並提高 MAP 至 80-90 mmHg',
+                        correct: false,
+                        feedback: '錯誤！治標不治本！在<strong>未確認根本原因</strong>前盲目增加 flow 和壓力可能：<br><br><strong>1. 無效甚至有害：</strong><br>• 若插管在假腔：增加 flow → 更多血流灌入假腔 → 真腔更塌陷 → 器官灌注<strong>更差</strong><br>• 若冠狀動脈受累：增加 MAP 不會改善冠脈血流<br>• 可能增加出血風險（高壓灌注）<br><br><strong>2. 掩蓋問題：</strong><br>• 可能暫時改善某些數值（如 SvO₂）<br>• 但沒有解決根本問題<br>• 延遲正確診斷和處置<br><br><strong>3. 增加併發症：</strong><br>• 過高的 pump flow：溶血、microemboli<br>• 過高的 MAP：出血、腦損傷<br><br><strong>正確做法：</strong><br>先診斷（TEE + team communication）→ 再針對性處理<br>診斷 > 盲目調整參數'
+                    },
+                    {
+                        label: 'D',
+                        text: '給予 Dobutamine 或 Epinephrine 改善心臟功能，同時給予 Furosemide 改善尿量',
+                        correct: false,
+                        feedback: '錯誤！錯誤的病因假設！這個處置基於<strong>錯誤的假設</strong>：「問題在心臟功能」。<br><br><strong>為什麼這是錯的？</strong><br><br>1. <strong>問題不在 pump（心臟），在 plumbing（管路/血管）</strong><br>• 新發 inferior wall hypokinesis：可能冠脈受累或插管問題，不是單純收縮力不足<br>• SvO₂ 下降：組織灌注不足，不是 cardiac output 不足<br>• Inotrope 無法解決插管位置錯誤或冠脈缺血<br><br>2. <strong>Inotrope 在 CPB 上的角色有限：</strong><br>• CPB 期間心臟是 arrested 或 fibrillating（cross-clamp on）<br>• Inotrope 主要作用於<strong>周邊血管</strong>和<strong>代謝</strong><br>• 不會改善「假腔灌注」或「冠脈剝離」<br><br>3. <strong>Furosemide 在此情境的問題：</strong><br>• 尿量減少是<strong>腎灌注不足</strong>的徵象，不是單純容積過多<br>• 在灌注不足時給利尿劑 → 可能加重腎損傷<br>• 正確做法：<strong>改善灌注</strong>，尿量自然會恢復<br><br>4. <strong>可能的風險：</strong><br>• Epinephrine 在 CPB 上：周邊血管收縮 → 可能惡化某些器官灌注<br>• 增加氧耗 → SvO₂ 可能進一步下降<br>• 掩蓋低血容量（若有）<br><br><strong>Remember：</strong><br>CPB 期間的灌注問題，99% 是「mechanical」而非「pharmacological」<br>→ Fix the plumbing first, then consider drugs'
+                    }
+                ],
+                keyPoints: [
+                    '持續 TEE 監測：真腔血流、心臟功能、主動脈瓣功能、新發壁運動異常',
+                    'CPB 灌注監測：SvO₂ >65%、Lactate trend、尿量 >0.5 mL/kg/hr、四肢灌注',
+                    'Malperfusion 徵象：新發壁運動異常 + SvO₂↓ + 尿量↓ + Lactate↑ → 立即調查原因',
+                    '插管位置確認：TEE 觀察 descending aorta 真假腔血流，確保插管在真腔',
+                    'CPB 參數目標：Flow 2.2-2.4 L/min/m²、MAP 50-80 mmHg、Hb 7-9 g/dL、Temp per protocol',
+                    '神經監測：Bilateral NIRS、EEG（if available）、瞳孔反射（降溫前）',
+                    '團隊溝通 critical：Surgeon + Perfusionist + Anesthesia 必須同步資訊、快速決策',
+                    'Troubleshooting 原則：先確認診斷（TEE + monitors）→ 系統性排查（插管、circuit、器官）→ 針對性處置'
+                ]
+            },
+
+            // Stage 6: Post-CPB Coagulopathy
+            {
+                number: 6,
+                title: '體外循環後凝血管理',
+                subtitle: 'Post-CPB Coagulopathy Management',
+                scenario: '手術修復完成（ascending aorta + hemi-arch replacement），準備脫離 CPB。Protamine 已給予（heparin 30,000 units → protamine 300 mg，分三次給予），ACT 從 520 sec 降至 135 sec（baseline 110 sec）。但手術視野仍有明顯微血管出血（oozing from all raw surfaces）。<br><br>實驗室緊急報告：<br>• Hb 8.2 g/dL（術前 13.5）<br>• PLT 58×10⁹/L（術前 220）<br>• PT 17.8 sec (INR 1.6)（術前 11.2 sec）<br>• aPTT 48 sec（術前 28 sec）<br>• Fibrinogen 105 mg/dL（術前 280 mg/dL）<br>• D-dimer >5000 ng/mL<br><br>TEG 結果剛送出（15 分鐘後才有）。外科表示無明顯外科性出血點。以下處置優先順序何者最適當？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '先輸 FFP 糾正 PT/aPTT，再給血小板',
+                        correct: false,
+                        feedback: '錯誤！次佳選擇！雖然 PT/aPTT 延長，但 Type A 剝離術後最關鍵的是<strong>纖維蛋白原</strong>。研究顯示纖維蛋白原濃度和功能在 Type A 剝離術後顯著降低，應優先快速補充。'
+                    },
+                    {
+                        label: 'B',
+                        text: '優先補充纖維蛋白原（Cryoprecipitate 或 Fibrinogen concentrate），再依 TEG/ROTEM 指引處理',
+                        correct: true,
+                        feedback: '正確！正確！Type A 剝離術後凝血管理是<strong>最具挑戰性</strong>的環節，處理策略：<br><br><strong>📊 為什麼纖維蛋白原最重要？</strong><br><br>🔬 <strong>Type A 剝離特殊性：</strong><br>• 術前已有<strong>消耗性凝血病變</strong>（假腔血栓形成消耗凝血因子）<br>• CPB 進一步稀釋和消耗纖維蛋白原<br>• 低溫抑制纖維蛋白原聚合功能<br>• 研究顯示：Type A 術後 fibrinogen <100 mg/dL 很常見<br><br>🎯 <strong>纖維蛋白原是凝血的「骨架」：</strong><br>• 沒有足夠纖維蛋白原 → 即使其他因子正常，凝血也無法形成穩固血栓<br>• 目標濃度：>150-200 mg/dL<br>• 每 1 g cryoprecipitate ≈ 增加 fibrinogen 10-15 mg/dL<br><br><strong>💉 實際處置順序（step-by-step）：</strong><br><br><strong>第一優先：快速補充纖維蛋白原</strong><br><br>選項 1：Cryoprecipitate（最常用）<br>• 劑量：10-20 units（1 unit = 10-15 mL）<br>• 含：Fibrinogen、Factor VIII、vWF、Factor XIII<br>• 優勢：同時補充多種凝血因子<br>• 缺點：需解凍（15-20 min）、容積負荷<br><br>選項 2：Fibrinogen concentrate（理想但昂貴）<br>• 劑量：3-4 g IV（50 mg/kg）<br>• 優勢：快速、精確、小容積、病毒去活化<br>• 缺點：昂貴（台灣健保給付限制）<br>• 適應症：大量出血、容積超負荷患者<br><br><strong>第二優先：血小板輸注</strong><br>• 劑量：6-10 units（目標 PLT >80-100×10⁹/L）<br>• 此患者 PLT 58 → 需約 6-8 units<br>• CPB 後血小板功能和數量都受損<br>• Platelet function assay 可能比 count 更重要<br><br><strong>第三優先：其他凝血因子</strong><br><br>依據 TEG/ROTEM 或實驗室數據：<br><br>🅰️ 若 PT/aPTT 仍延長（after fibrinogen corrected）：<br>• FFP 4-6 units 或<br>• PCC 1000-2000 units（faster, 但血栓風險）<br><br>🅱️ 若懷疑纖溶亢進（D-dimer ↑↑, TEG LY30 >3%）：<br>• TXA 1 g IV over 10 min（or 10-15 mg/kg）<br>• 爭議：Type A 是否常規使用 TXA？<br><br><strong>重要注意事項：</strong><br><br>1. <strong>Protamine 過量？</strong><br>• ACT 135 vs baseline 110 → 接近 baseline ✓<br>• 若 ACT < baseline 或出血持續 → 可能 protamine 過量<br>• Protamine 本身有抗凝作用！<br><br>2. <strong>外科性 vs 凝血性出血鑑別：</strong><br>正確！外科已確認無 surgical bleeding<br>正確！微血管滲血（oozing from all surfaces）→ 凝血功能障礙<br><br>3. <strong>低體溫影響：</strong><br>• 確保核心體溫 >35°C<br>• 每降 1°C → 凝血酶活性降 10%<br>• Lab 數值在 37°C 測定 → 可能<strong>低估</strong>患者實際凝血功能障礙<br><br>4. <strong>避免的陷阱：</strong><br>錯誤！盲目大量輸血（未依 POC 監測）<br>錯誤！過度輸 FFP（容積負荷、稀釋、輸血相關肺損傷 TRALI）<br>錯誤！延遲識別外科性出血<br>錯誤！Calcium 未補充（citrate from blood products）<br><br><strong>📈 輸血目標（guideline）：</strong><br>• Hb：7-9 g/dL（CPB 中），>8 g/dL（post-CPB）<br>• PLT：>50×10⁹/L（出血患者），>100×10⁹/L（使用抗血小板藥物）<br>• Fibrinogen：>150-200 mg/dL<br>• PT/INR：<1.5<br>• Calcium（ionized）：>1.0 mmol/L'
+                    },
+                    {
+                        label: 'C',
+                        text: '給予 PCC (Prothrombin Complex Concentrate) 快速糾正凝血功能',
+                        correct: false,
+                        feedback: '錯誤！不適當！PCC 主要糾正維生素 K 依賴性凝血因子，但此患者主要問題是纖維蛋白原低下和血小板低下（CPB 相關），而非維生素 K 缺乏。應優先補充纖維蛋白原。'
+                    },
+                    {
+                        label: 'D',
+                        text: '大量輸血（RBC + FFP + PLT 1:1:1），不需等實驗室報告',
+                        correct: false,
+                        feedback: '錯誤！過度處置！雖然大量輸血有其角色，但<strong>目標導向輸血</strong>（依據 POC 檢測如 TEG/ROTEM）比盲目輸血更有效且減少併發症。應優先處理纖維蛋白原低下。'
+                    }
+                ],
+                keyPoints: [
+                    '多因素凝血功能障礙：低溫、稀釋、凝血因子/血小板消耗、纖溶、Type A 術前已有消耗性凝血',
+                    '纖維蛋白原最關鍵：Type A 術後 fibrinogen 顯著降低，優先補充（Cryoprecipitate 10-20 units 或 Fibrinogen concentrate 3-4 g），目標 >150-200 mg/dL',
+                    'POC 監測：TEG/ROTEM 指導治療優於傳統 lab（faster turnaround, functional assay）',
+                    '血小板：數量 >50×10⁹/L（出血）或 >100×10⁹/L（抗血小板藥物），但<strong>功能</strong>可能比數量更重要',
+                    'Protamine 逆轉：目標 ACT 回基線 ±10%，避免過量（protamine 本身有抗凝作用）',
+                    '體溫管理：確保 core temp >35°C（每降 1°C → 凝血酶活性↓10%）',
+                    'Calcium 補充：監測 ionized Ca²⁺ >1.0 mmol/L（citrate from blood products 會螯合 calcium）',
+                    '常見陷阱：盲目輸血、protamine 過量、延遲識別外科性出血、未糾正低體溫和低血鈣、過度輸 FFP 導致容積負荷/TRALI'
+                ]
+            },
+
+            // Stage 7: Post-repair TEE Assessment
+            {
+                number: 7,
+                title: '術後 TEE 評估',
+                subtitle: 'Post-repair TEE Assessment',
+                scenario: '手術修復完成（ascending aorta + hemi-arch replacement with Dacron graft）。復溫進行中，目標溫度 36.5°C。外科已完成遠端和近端吻合，準備脫離 CPB。<br><br>您進行系統性術後 TEE 評估，發現：<br><br><strong>主動脈根部和升主動脈：</strong><br>• Dacron graft 位置良好，無明顯滲漏<br>• 近端吻合處（at sinotubular junction）完整<br>• 主動脈瓣三葉，形態正常<br>• <strong>主動脈瓣逆流：mild AI</strong>（PHT 420 ms, vena contracta 0.35 cm）<br><br><strong>主動脈弓和降主動脈：</strong><br>• Hemi-arch 吻合處完整<br>• 降主動脈可見<strong>殘餘剝離延伸</strong>（從弓部遠端延伸至腹主動脈）<br>• 假腔內有緩慢血流（swirling pattern）<br>• 真腔血流充足，收縮期擴張良好<br><br><strong>心臟功能：</strong><br>• LV: EF ~55%，無區域壁運動異常（inferior wall 已恢復）<br>• RV: 功能正常<br>• 無心包積液<br><br>外科表示升主動脈和弓部已完全修復，詢問您的評估意見。以下何者正確？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '降主動脈殘餘剝離代表手術失敗，必須延長手術範圍，進行全降主動脈置換',
+                        correct: false,
+                        feedback: '錯誤！過度反應且不切實際！這是對 Type A 剝離手術目標的<strong>誤解</strong>：<br><br><strong>為什麼這是錯的？</strong><br><br>1. <strong>Type A 剝離手術的主要目標：</strong><br>• <strong>Primary goal：</strong>修復<strong>近端撕裂口</strong>（entry tear in ascending aorta）<br>• <strong>Secondary goal：</strong>防止主動脈破裂和心包填塞<br>• <strong>NOT the goal：</strong>修復所有剝離範圍<br><br>2. <strong>為什麼不處理降主動脈？</strong><br>• Type A 急性期手術風險已經很高（mortality 10-35%）<br>• 延長手術 → 增加 CPB 時間 → 顯著增加併發症：<br>  — 出血風險<br>  — 神經併發症<br>  — 腎功能損傷<br>  — 多重器官衰竭<br>• 降主動脈剝離在近端修復後：<br>  — 多數會自行血栓化（thrombose）<br>  — 假腔壓力降低（no inflow from entry tear）<br>  — 真腔血流改善<br><br>3. <strong>臨床證據：</strong><br>• 60-80% Type A 患者術後有殘餘剝離<br>• 僅 20-30% 需要後續降主動脈干預<br>• 急性期同時處理降主動脈：mortality ↑↑，benefit unclear<br><br>4. <strong>降主動脈處理時機：</strong><br>• <strong>急性期（現在）：</strong>不處理，除非：<br>  — 降主動脈破裂或即將破裂<br>  — 嚴重 malperfusion（腸道、腎臟、下肢）<br>  — 假腔快速擴大（>6 cm）<br>• <strong>慢性期（術後 3-6 個月）：</strong>影像追蹤，若有以下情況考慮 TEVAR 或開胸手術：<br>  — 假腔持續擴大<br>  — 主動脈直徑 >5.5-6 cm<br>  — 症狀性（疼痛、壓迫）<br><br><strong>正確策略：</strong><br>近端修復完成 → 確認真腔血流充足 → 術後密切影像追蹤 → 必要時分期處理'
+                    },
+                    {
+                        label: 'B',
+                        text: '這是可接受的手術結果。確認：(1) 近端撕裂口完全切除、(2) 主動脈瓣功能可接受（mild AI 不需處理）、(3) 降主動脈真腔血流充足。建議脫離 CPB，術後密切追蹤殘餘剝離。',
+                        correct: true,
+                        feedback: '正確！正確！這是<strong>標準的術後評估和決策</strong>：<br><br><strong>系統性術後 TEE 評估 Checklist：</strong><br><br>📋 <strong>Step 1: 手術修復評估</strong><br><br>✅ <strong>近端修復（Critical）：</strong><br>• Entry tear 完全切除？ ✓（升主動脈已置換）<br>• Graft 吻合處完整？ ✓（無滲漏）<br>• 所有近端 communication 排除？ ✓<br><br>✅ <strong>主動脈瓣（Critical）：</strong><br>• 形態：三葉、正常 ✓<br>• 功能：mild AI（PHT 420 ms, VC 0.35 cm）<br>  — <strong>Mild AI 是可接受的</strong><br>  — 不需要 valve replacement/repair<br>  — 術後可能改善（消腫、remodeling）<br>• 若為 moderate-severe AI → 需要處理<br><br><strong>主動脈瓣逆流分級（重要參考）：</strong><br>• Mild: VC <0.3 cm, PHT >500 ms<br>• Moderate: VC 0.3-0.6 cm, PHT 200-500 ms<br>• Severe: VC >0.6 cm, PHT <200 ms<br>→ 此患者：VC 0.35 cm, PHT 420 ms = <strong>Mild-moderate</strong><br>→ 可接受，監測即可<br><br>📋 <strong>Step 2: 遠端評估</strong><br><br><strong>降主動脈殘餘剝離（Common & Expected）：</strong><br>• 剝離延伸至降主動脈：60-80% 的 Type A 患者<br>• <strong>關鍵問題不是「有沒有」，而是：</strong><br><br>1. <strong>真腔血流是否充足？</strong> ✓<br>   • True lumen 收縮期擴張良好<br>   • 血流速度正常<br>   • 無 dynamic collapse<br><br>2. <strong>假腔狀態？</strong><br>   • 緩慢血流（swirling）：常見，可能逐漸血栓化<br>   • 若完全血栓化：更好（false lumen thrombosis）<br>   • 若高速血流：需注意（持續 communication）<br><br>3. <strong>器官灌注？</strong><br>   • 腎臟：尿量、creatinine<br>   • 腸道：lactate、腹部理學檢查<br>   • 下肢：pulse、溫度、color<br><br>📋 <strong>Step 3: 心臟功能</strong><br><br>✅ <strong>LV function：</strong><br>• EF 55%：正常 ✓<br>• Inferior wall 恢復：表示冠脈灌注已改善 ✓<br>• 無新發 RWMA：good sign ✓<br><br>✅ <strong>RV function：</strong>正常 ✓<br><br>✅ <strong>無心包積液：</strong>✓<br><br>📋 <strong>Step 4: 其他評估</strong><br><br>• Mitral valve：功能？（CPB 後可能 MR）<br>• Tricuspid valve：功能？<br>• IVC：容積狀態？<br>• 胸腔積液：有無？量？<br><br><strong>決策樹：可以脫離 CPB 嗎？</strong><br><br>正確！近端修復完整<br>正確！主動脈瓣功能可接受（mild AI）<br>正確！降主動脈真腔血流充足<br>正確！心臟功能良好<br>正確！無心包積液<br>✗ 任何需要立即處理的問題<br><br>→ <strong>Yes，可以脫離 CPB</strong><br><br><strong>術後管理重點：</strong><br><br>1. <strong>血壓控制（Critical）：</strong><br>• 目標：SBP 100-120 mmHg<br>• 持續使用 β-blocker（心率 <60-70）<br>• 避免高血壓 → 防止殘餘剝離延伸<br><br>2. <strong>影像追蹤（Essential）：</strong><br>• 出院前：CTA<br>• 1 個月：CTA<br>• 3 個月：CTA<br>• 6 個月：CTA<br>• 之後每年一次，終身追蹤<br><br>3. <strong>監測指標：</strong><br>• 假腔直徑變化<br>• 真腔/假腔血流<br>• 主動脈總直徑<br>• 新的撕裂口？<br><br>4. <strong>後續干預適應症：</strong><br>• 主動脈直徑 >5.5-6 cm<br>• 快速擴大（>5 mm/year）<br>• 症狀性（疼痛、壓迫）<br>• 併發症（破裂、malperfusion）<br><br><strong>長期預後：</strong><br>• 5-year survival: 60-80%<br>• 需要二次手術：20-30%<br>• 終身追蹤必要'
+                    },
+                    {
+                        label: 'C',
+                        text: 'Mild AI 不可接受，必須在脫離 CPB 前進行主動脈瓣置換或修補',
+                        correct: false,
+                        feedback: '錯誤！過度治療！這是對術後 AI 嚴重度的<strong>誤判</strong>：<br><br><strong>為什麼 Mild AI 可以接受？</strong><br><br>1. <strong>術後 AI 的自然病程：</strong><br>• Type A 術後新發或加重的 AI：40-60%<br>• 原因：<br>  — 主動脈根部擴大（修復前）<br>  — 瓣葉 prolapse（剝離影響 commissure）<br>  — 術中操作（瓣環周圍組織水腫）<br>• <strong>Mild AI 常在術後改善：</strong><br>  — 組織消腫<br>  — 主動脈 remodeling<br>  — 血流動力學穩定後<br><br>2. <strong>何時需要處理主動脈瓣？</strong><br><br>正確！<strong>術中同時處理適應症：</strong><br>• <strong>Moderate-severe AI</strong>（此例為 mild → 不符合）<br>• Aortic root dissection with valve involvement<br>• 瓣葉撕裂或脫垂<br>• Bicuspid aortic valve with pathology<br><br>✗ <strong>Mild AI 不需處理：</strong><br>• 不影響脫離 CPB<br>• 不影響術後恢復<br>• 可能自行改善<br>• 若持續存在：門診追蹤即可<br><br>3. <strong>術中加做 AVR/AVP 的風險：</strong><br>• 延長 CPB 時間 → 凝血功能惡化<br>• 延長 cross-clamp 時間 → 心肌損傷<br>• 增加手術複雜度 → 併發症風險<br>• AVR：需要終身抗凝（若機械瓣）<br>• 風險/效益比不佳（for mild AI）<br><br>4. <strong>此患者的 AI 評估：</strong><br>• PHT 420 ms：mild-moderate（界線值）<br>• VC 0.35 cm：mild-moderate<br>• 血流動力學穩定<br>• LV function 正常（EF 55%）<br>• 無 LV dilatation 徵象<br><br>→ <strong>結論：</strong>可接受，不需處理，術後追蹤<br><br><strong>術後追蹤策略：</strong><br>• Echo at discharge：baseline<br>• Echo at 1 month：評估是否改善<br>• 若進展至 moderate-severe：考慮 elective AVR<br>• 若維持 mild：每年追蹤即可<br><br><strong>記住：</strong><br>Type A dissection surgery is already high-risk.<br>Don\'t add unnecessary procedures for mild problems that may improve.'
+                    },
+                    {
+                        label: 'D',
+                        text: '假腔內有血流代表新的撕裂口，需要找出並修復',
+                        correct: false,
+                        feedback: '錯誤！對殘餘剝離血流動力學的<strong>誤解</strong>：<br><br><strong>為什麼假腔會有血流？</strong><br><br>1. <strong>不一定是新撕裂口：</strong><br><br><strong>假腔血流的可能來源：</strong><br><br>A. <strong>近端殘餘 communication（在修復範圍外）：</strong><br>• Entry tear 已切除（在升主動脈）<br>• 但可能有 secondary tears：<br>  — 在弓部遠端（hemi-arch 修復範圍外）<br>  — 在降主動脈近端<br>  — 在腹主動脈<br>• 這些是<strong>預期的</strong>，不需要急性期處理<br><br>B. <strong>逆流（Retrograde flow from distal tears）：</strong><br>• 遠端的 re-entry tears<br>• 血流從真腔 → 假腔（through distal tears）<br>• 收縮期進入，舒張期部分回流<br>• 形成 swirling pattern<br><br>C. <strong>側枝循環：</strong><br>• 肋間動脈、腰動脈<br>• 從真腔分支 → 供應假腔周圍組織<br><br>2. <strong>如何判斷假腔血流的意義？</strong><br><br>🟢 <strong>良性徵象（不需處理）：</strong><br>• 緩慢血流（swirling, <30 cm/s）<br>• 真腔血流充足<br>• 假腔無快速擴大<br>• 器官灌注良好<br>• spontaneous echo contrast（提示即將血栓化）<br><br>🔴 <strong>需注意徵象（可能需處理）：</strong><br>• 高速血流（>50-80 cm/s）<br>• 真腔塌陷或 dynamic compression<br>• 假腔快速擴大<br>• 器官 malperfusion<br>• 新發疼痛<br><br>3. <strong>此患者的假腔評估：</strong><br>• 緩慢血流（swirling）：🟢 良性<br>• 真腔充足：🟢 良性<br>• 無器官缺血徵象：🟢 良性<br><br>→ <strong>不需要術中處理</strong><br><br>4. <strong>假腔的自然病程：</strong><br><br>📊 <strong>近端修復後的變化：</strong><br>• Entry tear 切除 → 假腔 inflow 減少<br>• 假腔壓力下降<br>• 真腔擴張改善<br>• 血流重新分配：更多流向真腔<br><br>🎯 <strong>理想結局（40-50%）：</strong><br>• 假腔完全血栓化（complete thrombosis）<br>• 真腔完全復原<br>• 主動脈 remodeling<br><br><strong>需追蹤情況（30-40%）：</strong><br>• 假腔部分血栓、部分血流<br>• 穩定狀態<br>• 影像密切追蹤<br><br><strong>需干預情況（10-20%）：</strong><br>• 假腔持續擴大<br>• 出現併發症<br><br><strong>重點：</strong><br>假腔血流 ≠ 需要立即修復<br>關鍵是：真腔功能 + 器官灌注 + 術後追蹤'
+                    }
+                ],
+                keyPoints: [
+                    '系統性術後評估：(1) 手術修復完整性 (2) 主動脈瓣功能 (3) 遠端主動脈 (4) 心臟功能 (5) 其他瓣膜 (6) 容積狀態',
+                    '近端修復評估：Entry tear 完全切除、graft 吻合完整、無滲漏、所有近端 communication 排除',
+                    '主動脈瓣逆流：mild AI 可接受（術後可能改善），moderate-severe AI 需處理',
+                    '殘餘剝離：60-80% 患者有降主動脈殘餘剝離，關鍵是真腔血流充足、器官灌注良好',
+                    '假腔血流：緩慢血流（swirling）是預期的，不代表手術失敗，多數會逐漸血栓化',
+                    '脫離 CPB 標準：近端修復完整 + 主動脈瓣功能可接受 + 真腔血流充足 + 心臟功能良好 + 無立即威脅',
+                    '術後血壓控制：SBP 100-120 mmHg、HR <60-70 bpm，防止殘餘剝離延伸',
+                    '長期追蹤：CTA at 1, 3, 6, 12 months, then yearly，監測假腔變化、主動脈直徑、新撕裂口'
+                ]
+            },
+
+            // Stage 8: Post-operative Care
+            {
+                number: 8,
+                title: '術後轉送與持續照護',
+                subtitle: 'Post-operative Transfer and Ongoing Care',
+                scenario: '患者已順利脫離 CPB，止血良好（total blood loss ~800 mL）。TEE 評估滿意，生命徵象穩定（BP 118/72 mmHg on Nitroglycerin 0.5 mcg/kg/min, HR 62 bpm, SpO₂ 100% on FiO₂ 0.5）。手術全程約 8 小時，CPB 時間 280 分鐘，循環停止時間 38 分鐘（bilateral ACP）。準備轉送 ICU。<br><br><strong>轉送後 90 分鐘，ICU 通知：</strong><br><br>患者開始甦醒，但神經學評估發現異常：<br>• <strong>右側肢體無力</strong>（muscle power 2/5）<br>• <strong>左側肢體正常</strong>（muscle power 5/5）<br>• 對指令反應遲緩，但可遵從簡單指令<br>• 瞳孔：雙側 3 mm，對光反射正常<br>• <strong>GCS: E3V2M5 = 10</strong><br><br><strong>生命徵象：</strong><br>• BP 142/88 mmHg（已調降 Nitroglycerin）<br>• HR 68 bpm<br>• SpO₂ 98% on FiO₂ 0.4<br>• Temperature 36.2°C<br>• 尿量 70 mL/hr<br>• Chest tube drainage 50 mL/hr（血色）<br><br><strong>實驗室數據（術後 2 小時）：</strong><br>• Hb 9.8 g/dL（輸血後）<br>• PLT 98×10⁹/L<br>• Lactate 2.1 mmol/L（down from 2.8）<br>• Creatinine 1.2 mg/dL（baseline 0.9）<br><br>您應該如何處理？',
+                choices: [
+                    {
+                        label: 'A',
+                        text: '這可能是麻醉藥物殘留或術後譫妄，繼續觀察 2-4 小時再評估',
+                        correct: false,
+                        feedback: '錯誤！危險的延遲診斷！將<strong>新發神經學缺損</strong>誤判為「麻醉殘留」是嚴重錯誤：<br><br><strong>為什麼這不是麻醉殘留？</strong><br><br>1. <strong>臨床特徵不符合：</strong><br><br>錯誤！<strong>麻醉殘留應該是：</strong><br>• <strong>對稱性</strong>意識低下<br>• <strong>全身性</strong>肌肉無力<br>• 逐漸改善（隨藥物代謝）<br>• 無<strong>局部神經學徵象</strong><br><br>正確！<strong>此患者特徵：</strong><br>• <strong>單側</strong>肢體無力（右側 2/5 vs 左側 5/5）→ focal deficit<br>• 對簡單指令有反應 → 部分清醒<br>• GCS 10 → 不是完全無意識<br>• <strong>這是典型的 stroke pattern！</strong><br><br>2. <strong>Type A 剝離術後神經併發症風險：</strong><br><br>📊 <strong>發生率：</strong><br>• Stroke: 3-10%<br>• TIA: 2-5%<br>• Spinal cord injury: 1-3%<br>• Delirium: 20-40%<br><br>⏱️ <strong>時間窗口關鍵：</strong><br>• Ischemic stroke treatment window:<br>  — IV tPA: 4.5 hours（但術後通常禁忌）<br>  — Mechanical thrombectomy: 6-24 hours<br>• <strong>每延遲 1 小時</strong> → 失去 ~190 million neurons<br>• "Time is brain"<br><br>3. <strong>Type A 術後 stroke 的可能原因：</strong><br><br>🔴 <strong>術中因素：</strong><br>• 腦灌注不足（ACP 流量/壓力不足）<br>• 栓塞（air, debris, atheroma）<br>• 循環停止時間過長<br>• 低溫相關併發症<br><br>🔴 <strong>術後因素：</strong><br>• 血壓過低 → 腦灌注不足<br>• 血壓過高 → 出血性轉化<br>• 凝血功能異常<br>• 心房顫動 → 血栓<br><br>4. <strong>延遲診斷的後果：</strong><br>• 錯過治療黃金時間<br>• 梗塞面積擴大<br>• 不可逆腦損傷<br>• 功能預後惡化<br>• 死亡率增加<br><br><strong>正確做法：</strong><br>新發單側神經學缺損 = <strong>Stroke until proven otherwise</strong><br>→ 立即影像學檢查（不等待、不觀察）'
+                    },
+                    {
+                        label: 'B',
+                        text: '立即安排緊急腦部 CT（non-contrast），同時評估凝血功能和血流動力學，神經科緊急會診',
+                        correct: true,
+                        feedback: '正確！正確！這是<strong>標準的急性中風處置流程</strong>（即使是術後患者）：<br><br><strong>緊急處置流程（Step-by-step）：</strong><br><br>🚨 <strong>Step 1: 立即啟動 Stroke Protocol（0-15 min）</strong><br><br>1. <strong>Primary survey：</strong><br>• Airway：插管狀態確認<br>• Breathing：SpO₂ >94%，PaO₂ >60 mmHg<br>• Circulation：BP, HR 穩定<br>• Disability：詳細神經學評估（見下）<br><br>2. <strong>快速神經學評估（NIHSS or simplified）：</strong><br>• <strong>Level of consciousness：</strong>GCS 10 (E3V2M5)<br>• <strong>Motor function：</strong><br>  — Right side: 2/5 (severe weakness)<br>  — Left side: 5/5 (normal)<br>  → <strong>Left hemisphere involvement</strong><br>• <strong>Sensory：</strong>評估<br>• <strong>Language：</strong>能遵從簡單指令 → receptive OK，但 V2 → expressive?<br>• <strong>Visual fields：</strong>評估<br>• <strong>Cranial nerves：</strong>瞳孔 OK<br><br>3. <strong>通知團隊：</strong><br>• 神經科 stroke team（STAT）<br>• Radiology（準備 CT）<br>• 外科團隊（告知術後併發症）<br><br>🏥 <strong>Step 2: 緊急影像學（15-30 min）</strong><br><br>📷 <strong>Non-contrast Head CT（首選，最快）：</strong><br><br><strong>目的：</strong><br>1. 排除出血性中風（hemorrhagic stroke）<br>   • Intracerebral hemorrhage (ICH)<br>   • Subarachnoid hemorrhage (SAH)<br>   • Subdural/epidural hematoma<br>   → 若有出血：不同處理策略<br><br>2. 評估缺血性中風（ischemic stroke）<br>   • Early signs：loss of gray-white differentiation<br>   • Hyperdense MCA sign<br>   • Sulcal effacement<br>   → 確認梗塞範圍<br><br>3. 評估其他病因<br>   • Tumor, abscess（unlikely but possible）<br><br>💉 <strong>同時抽血（STAT lab）：</strong><br>• CBC：Hb, PLT（出血風險評估）<br>• Coagulation：PT/INR, aPTT（此患者術後，可能異常）<br>• BMP：glucose, electrolytes<br>• Cardiac biomarker：Troponin（若懷疑心因性栓塞）<br><br>🔬 <strong>特殊情況考慮：</strong><br>• CTA head & neck：評估血管（large vessel occlusion?）<br>• MRI + DWI：更敏感（但需時較久）<br>• TEE：評估心內血栓（若懷疑 cardioembolic）<br><br>🎯 <strong>Step 3: 根據 CT 結果決策（30-60 min）</strong><br><br>🟢 <strong>情境 A：Ischemic stroke, no hemorrhage</strong><br><br><strong>評估 reperfusion therapy 資格：</strong><br><br>錯誤！<strong>IV tPA（thrombolysis）：</strong><br>• <strong>通常禁忌於術後患者</strong><br>• Major surgery within 14 days = absolute contraindication<br>• 出血風險極高（術後 coagulopathy）<br><br>正確！<strong>Mechanical thrombectomy（機械取栓）：</strong><br>• 適應症：<br>  — Large vessel occlusion (LVO)<br>  — ASPECTS ≥6<br>  — Within 6-24 hours of onset<br>• <strong>可能適用</strong>（即使術後）<br>• 風險/效益需神經科評估<br><br>🔴 <strong>情境 B：Hemorrhagic stroke</strong><br><br>• <strong>原因：</strong><br>  — 術後 coagulopathy<br>  — Hypertension（BP 142/88，偏高）<br>  — Reperfusion injury<br><br>• <strong>處置：</strong><br>  — 嚴格血壓控制（SBP <140）<br>  — 糾正 coagulopathy（FFP, PCC, PLT）<br>  — 神經外科會診（需要手術減壓？）<br>  — 避免抗凝、抗血小板<br><br>🟡 <strong>情境 C：No acute finding on CT</strong><br><br>• 可能為：<br>  — Early ischemic stroke（CT 未顯示）<br>  — Small vessel disease<br>  — Other causes<br>• 建議：<br>  — MRI + DWI（更敏感）<br>  — 持續神經學監測<br>  — Repeat CT in 24-48 hours<br><br>🩺 <strong>Step 4: 支持性治療（同時進行）</strong><br><br>1. <strong>血壓管理（Critical）：</strong><br><br>🎯 <strong>目標因 stroke type 而異：</strong><br><br>• <strong>Ischemic stroke：</strong><br>  — 未做 reperfusion：允許 permissive hypertension<br>    目標：SBP 140-180 mmHg（維持腦灌注）<br>  — 做了 reperfusion：SBP <180/105<br><br>• <strong>Hemorrhagic stroke：</strong><br>  — 嚴格控制：SBP <140 mmHg<br>  — 防止出血擴大<br><br>• <strong>此患者（未知 stroke type）：</strong><br>  — 保守目標：SBP 140-160 mmHg<br>  — CT 結果出來後調整<br><br>2. <strong>血糖控制：</strong><br>• 目標：140-180 mg/dL<br>• 高血糖 → 梗塞擴大<br>• 低血糖 → 腦損傷<br><br>3. <strong>體溫控制：</strong><br>• 目標：<36.5°C（輕度低溫 or 正常溫）<br>• 發燒 → 神經預後惡化<br><br>4. <strong>氧合和通氣：</strong><br>• SpO₂ >94%<br>• PaO₂ >60 mmHg<br>• PaCO₂ 35-40 mmHg（避免過度換氣 → 腦血流↓）<br><br>5️⃣ <strong>Seizure prophylaxis：</strong><br>• 不常規使用<br>• 若有 seizure activity → Levetiracetam or Fosphenytoin<br><br>📊 <strong>Step 5: 神經科會診（Essential）</strong><br><br><strong>神經科評估內容：</strong><br>• NIHSS score（標準化評估）<br>• Stroke etiology（embolic vs thrombotic vs hemorrhagic）<br>• Reperfusion therapy 適應症評估<br>• 短期和長期預後預測<br>• 復健計畫<br><br>📈 <strong>Step 6: 持續監測（ICU level care）</strong><br><br>1. <strong>神經學監測：</strong><br>• Neurological checks q1h ×24h, then q2-4h<br>• GCS, pupil, motor/sensory<br>• 任何惡化 → repeat CT<br><br>2. <strong>生命徵象：</strong><br>• Continuous BP, HR monitoring<br>• 嚴格 I/O<br>• Temperature<br><br>3. <strong>實驗室：</strong><br>• CBC, coag q6-12h<br>• BMP daily<br>• Cardiac enzymes if indicated<br><br><strong>預後因素：</strong><br>• Stroke severity（NIHSS score）<br>• Time to treatment<br>• Age, comorbidities<br>• Post-op stroke mortality: 20-50%<br>• Functional recovery: variable'
+                    },
+                    {
+                        label: 'C',
+                        text: '給予 Mannitol 0.5-1 g/kg IV 降腦壓，同時提高血壓至 SBP 160-180 mmHg 以改善腦灌注',
+                        correct: false,
+                        feedback: '錯誤！在<strong>未確診</strong>前的盲目處置，可能有害！<br><br><strong>為什麼這是錯的？</strong><br><br>1. <strong>Mannitol 使用時機錯誤：</strong><br><br>❓ <strong>Mannitol 適應症：</strong><br>• <strong>顱內壓升高</strong>（ICP elevation）with signs：<br>  — Cushing\'s triad（HTN + Bradycardia + irregular breathing）<br>  — Pupil changes（blown pupil）<br>  — Deteriorating GCS<br>  — Herniation signs<br>• Large ICH with mass effect<br>• Cerebral edema on imaging<br><br>錯誤！<strong>此患者狀況：</strong><br>• 無 ICP 升高徵象<br>• 瞳孔正常（3 mm, reactive）<br>• GCS 10 but stable<br>• <strong>未做 CT，不知道 stroke type！</strong><br><br>🚫 <strong>盲目使用 Mannitol 的風險：</strong><br><br>A. <strong>若為出血性中風：</strong><br>• Mannitol → 利尿 → 血容量↓<br>• → 血壓↓ → 腦灌注↓<br>• → Rebleeding risk（controversia）<br><br>B. <strong>若為缺血性中風：</strong><br>• 沒有明顯 ICP 升高 → 無效<br>• 利尿 → hypovolemia → 腦灌注可能惡化<br>• Rebound ICP elevation（停藥後）<br><br>C. <strong>術後特殊風險：</strong><br>• 利尿 → 電解質紊亂（hyponatremia, hypokalemia）<br>• → 心律不整風險（術後已有風險）<br>• Renal injury（術後 Cr already 1.2）<br><br>2. <strong>盲目升高血壓的風險：</strong><br><br>❓ <strong>Permissive hypertension 的原理：</strong><br>• Ischemic stroke：autoregulation 受損<br>• 需較高血壓維持 penumbra 灌注<br>• 目標：SBP 140-180（<strong>不是 160-180</strong>）<br><br>🚫 <strong>但此患者情況不明：</strong><br><br>A. <strong>若為出血性中風：</strong><br>• 升高血壓 → <strong>災難性</strong><br>• → Hematoma expansion<br>• → Rebleeding<br>• → 神經功能惡化<br>• → Death<br><br>B. <strong>Type A 術後特殊考量：</strong><br>• 殘餘剝離存在<br>• 高血壓 → 剝離延伸風險<br>• 吻合處應力增加<br>• 一般建議：SBP 100-140 mmHg<br><br>C. <strong>此患者 BP already 142/88：</strong><br>• 已經偏高（對術後 Type A 患者）<br>• 不應進一步升高<br>• 應該在 CT 確診後才調整<br><br><strong>正確的血壓策略：</strong><br><br>🎯 <strong>在 CT 結果前：</strong><br>• 維持 SBP 140-160 mmHg（保守）<br>• 避免劇烈波動<br>• 避免過低或過高<br><br>🎯 <strong>CT 結果後調整：</strong><br>• Ischemic → allow 140-180<br>• Hemorrhagic → strict <140<br>• Type A dissection consideration → balance<br><br>3. <strong>為什麼要先 CT？</strong><br><br>正確！<strong>Hemorrhagic vs Ischemic 決定：</strong><br>• 完全不同的治療策略<br>• 相反的血壓目標<br>• 不同的預後<br><br>正確！<strong>Safety first：</strong><br>• 先確診再治療<br>• 避免盲目干預造成傷害<br>• "First, do no harm"<br><br><strong>記住：</strong><br>術後神經學缺損 → Imaging first, then treat<br>不要在黑暗中射箭（Don\'t shoot in the dark）'
+                    },
+                    {
+                        label: 'D',
+                        text: '這是術後正常的神經學波動，調整鎮靜藥物劑量即可',
+                        correct: false,
+                        feedback: '錯誤！完全錯誤的臨床判斷！將<strong>明確的單側神經學缺損</strong>當作「正常波動」：<br><br><strong>什麼是「術後正常的神經學波動」？</strong><br><br>正確！<strong>真正的術後正常現象：</strong><br>• 全身性、對稱的意識狀態變化<br>• 與鎮靜藥物劑量相關<br>• 無局部神經學徵象<br>• 瞳孔對稱、正常反應<br>• 四肢肌力對稱<br>• 逐漸改善（隨藥物代謝）<br><br>錯誤！<strong>此患者的表現（NOT normal）：</strong><br>• <strong>單側</strong>肢體無力（right 2/5, left 5/5）<br>• <strong>Focal neurological deficit</strong><br>• 不對稱（asymmetry is NEVER normal）<br>• GCS 10 but can follow commands（部分清醒，不是藥物過量）<br><br>🚨 <strong>Red flags（絕不可忽視）：</strong><br><br>1. <strong>Asymmetric motor weakness</strong><br>   → Stroke, ICH, mass lesion<br><br>2. <strong>Focal deficit post-cardiac surgery</strong><br>   → Embolic event, hypoperfusion<br><br>3. <strong>Any new neurological finding</strong><br>   → Requires immediate investigation<br><br><strong>調整鎮靜藥物的危險：</strong><br><br>🔴 <strong>若真是 stroke：</strong><br>• 延遲診斷 → 錯失治療時間窗<br>• 繼續鎮靜 → 掩蓋症狀惡化<br>• 無法進行神經學評估<br>• 腦梗塞持續擴大<br>• 不可逆腦損傷<br><br>🔴 <strong>鎮靜藥物調整的迷思：</strong><br>• 「再給多一點讓他睡著」→ 掩蓋問題<br>• 「減少劑量看會不會醒」→ 延遲診斷<br>• 兩者都<strong>不是</strong>處理新發神經學症狀的方法！<br><br><strong>Type A dissection 術後神經併發症：</strong><br><br>📊 <strong>高風險因素（此患者都有）：</strong><br>• 長 CPB 時間（280 min）<br>• 循環停止使用（38 min with ACP）<br>• 複雜手術（ascending + hemi-arch）<br>• 術前可能已有腦灌注不良<br><br><strong>必須高度警覺：</strong><br>• Any new focal deficit = stroke until proven otherwise<br>• Immediate imaging mandatory<br>• Never attribute to "normal variation"<br><br><strong>Differential diagnosis（術後神經學異常）：</strong><br><br>1. <strong>Stroke（most likely）</strong><br>   • Embolic<br>   • Hypoperfusion<br>   • Hemorrhagic transformation<br><br>2. <strong>Intracranial hemorrhage</strong><br>   • Coagulopathy related<br>   • Hypertension related<br><br>3. <strong>Hypoxic-ischemic injury</strong><br>   • Global vs focal<br><br>4. <strong>Metabolic encephalopathy</strong><br>   • Usually global, not focal<br><br>5. <strong>Seizure (post-ictal state)</strong><br>   • Todd\'s paralysis<br>   • Need EEG<br><br>→ <strong>All require CT scan to differentiate</strong><br><br><strong>記住 3 個 "Never"：</strong><br><br>1. <strong>Never</strong> assume asymmetric findings are "normal"<br>2. <strong>Never</strong> delay imaging for new focal deficit<br>3. <strong>Never</strong> attribute stroke symptoms to sedation<br><br>Focal deficit = Imaging NOW'
+                    }
+                ],
+                keyPoints: [
+                    '術後神經學評估優先：任何新發單側神經學缺損 = stroke until proven otherwise',
+                    'Type A 術後 stroke 發生率：3-10%，危險因素包括長 CPB 時間、循環停止、複雜手術',
+                    '緊急影像學：non-contrast head CT 為首選（排除出血、評估缺血），不可延遲',
+                    '血壓管理：未確診前保守目標 SBP 140-160 mmHg，確診後依 stroke type 調整（ischemic 140-180, hemorrhagic <140）',
+                    '禁忌盲目治療：未 CT 前不給 Mannitol、不盲目升降血壓、不增加鎮靜藥物掩蓋症狀',
+                    '神經科緊急會診：NIHSS 評估、reperfusion therapy 評估（機械取栓可能適用，IV tPA 術後禁忌）',
+                    '器官灌注監測：腎功能（Cr, UO）、腸道灌注（lactate, 腹部評估）、下肢灌注（pulse, 溫度）',
+                    '持續監測：neurological checks q1h、嚴格血壓控制、血糖 140-180 mg/dL、體溫 <36.5°C、任何惡化 → repeat CT'
+                ]
+            },
+
+            // Final Summary
+            {
+                type: 'summary',
+                title: '完成！掌握 Type A 主動脈剝離麻醉管理',
+                content: `
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <div class="completion-badge" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.7088 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.76489 14.1003 1.98232 16.07 2.86" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            恭喜完成所有關卡
+                        </div>
+                        <p style="color: var(--text-secondary); margin-top: 16px;">您已系統性學習 Type A 主動脈剝離麻醉管理的八個關鍵步驟</p>
+                    </div>
+
+                    <div class="key-points">
+                        <h3>關鍵成功因素總結</h3>
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th>步驟</th>
+                                    <th>最關鍵目標</th>
+                                    <th>最危險陷阱</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. 術前穩定</strong></td>
+                                    <td>收縮壓 100-120 mmHg<br>心率 <60 次/分</td>
+                                    <td>先用血管擴張劑→反射性心搏過速</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. 監測建立</strong></td>
+                                    <td>TEE 辨識真假腔<br>評估併發症</td>
+                                    <td>過度操作 TEE 導致破裂</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. 麻醉誘導</strong></td>
+                                    <td>避免血壓劇烈波動</td>
+                                    <td>插管反應導致主動脈破裂</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. CPB 與腦保護</strong></td>
+                                    <td>中度低溫 + ACP/RCP</td>
+                                    <td>DHCA 單獨使用<br>循環停止過長</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. 術中管理</strong></td>
+                                    <td>維持真腔血流<br>器官灌注</td>
+                                    <td>未識別器官灌注不良</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6. 凝血管理</strong></td>
+                                    <td>快速補充纖維蛋白原<br>目標導向輸血</td>
+                                    <td>盲目輸血<br>延遲識別外科性出血</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>7. 術後 TEE</strong></td>
+                                    <td>確認手術修復充分<br>主動脈瓣功能</td>
+                                    <td>未識別殘餘撕裂口或主動脈瓣逆流</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>8. 術後照護</strong></td>
+                                    <td>神經功能評估<br>器官灌注監測</td>
+                                    <td>延遲識別中風或器官缺血</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="key-points" style="margin-top: 32px;">
+                        <h3>記住這些數字</h3>
+                        <ul>
+                            <li>未治療死亡率：<code>1-2% / 小時</code></li>
+                            <li>目標血壓：<code>100-120 mmHg</code></li>
+                            <li>目標心率：<code><60 次/分</code></li>
+                            <li>中度低溫：<code>26-30°C</code></li>
+                            <li>ACP 灌注壓：<code>50-80 mmHg</code></li>
+                            <li>纖維蛋白原目標：<code>>150-200 mg/dL</code></li>
+                            <li>血小板輸注閾值：<code><50×10⁹/L</code></li>
+                            <li>30 天死亡率：<code>10-35%</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container" style="margin-top: 40px;">
+                        <button class="btn" onclick="location.reload()">重新開始</button>
+                    </div>
+                `
+            }
+        ];
+
+        // Initialize
+        function init() {
+            renderStage(0);
+        }
+
+        // Render Stage
+        function renderStage(index) {
+            const stage = stages[index];
+            const contentArea = document.getElementById('content-area');
+            
+            if (stage.type === 'intro') {
+                contentArea.innerHTML = `
+                    <div class="card">
+                        ${stage.content}
+                    </div>
+                `;
+                updateProgress(0, '準備開始');
+            } else if (stage.type === 'summary') {
+                contentArea.innerHTML = `
+                    <div class="card">
+                        ${stage.content}
+                    </div>
+                `;
+                updateProgress(8, '完成！');
+            } else {
+                // Regular stage - choices in A, B, C, D order (no randomization)
+                let choicesHTML = stage.choices.map((choice, idx) => `
+                    <button class="choice-btn" onclick="selectChoice(${idx})">
+                        <span class="choice-label">${choice.label}</span>
+                        <div>${choice.text}</div>
+                    </button>
+                `).join('');
+
+                contentArea.innerHTML = `
+                    <div class="card">
+                        <div class="stage-header">
+                            <div class="stage-number">${stage.number}</div>
+                            <div class="stage-title">
+                                <h2>${stage.title}</h2>
+                                <p>${stage.subtitle}</p>
+                            </div>
+                        </div>
+
+                        <div class="scenario">
+                            ${stage.scenario}
+                        </div>
+
+                        <div class="choices" id="choices">
+                            ${choicesHTML}
+                        </div>
+
+                        <div id="feedback-area"></div>
+                        <div id="next-btn-area"></div>
+                    </div>
+                `;
+
+                updateProgress(stage.number, `步驟 ${stage.number}: ${stage.title}`);
+            }
+        }
+
+        // Select Choice
+        function selectChoice(choiceIndex) {
+            const stage = stages[currentStage];
+            const choice = stage.choices[choiceIndex];
+            const feedbackArea = document.getElementById('feedback-area');
+            const nextBtnArea = document.getElementById('next-btn-area');
+            const choiceBtns = document.querySelectorAll('.choice-btn');
+
+            // Disable all choices
+            choiceBtns.forEach((btn, idx) => {
+                btn.classList.add('disabled');
+                if (idx === choiceIndex) {
+                    btn.classList.add(choice.correct ? 'correct' : 'wrong');
+                }
+            });
+
+            // Show feedback
+            feedbackArea.innerHTML = `
+                <div class="feedback ${choice.correct ? 'correct' : 'wrong'}">
+                    <div class="feedback-title">
+                        <span class="feedback-icon">${choice.correct ? '✓' : '✗'}</span>
+                        ${choice.correct ? '答對了！' : '再想想'}
+                    </div>
+                    <div>${choice.feedback}</div>
+                </div>
+            `;
+
+            if (choice.correct) {
+                score++;
+                // Show key points
+                feedbackArea.innerHTML += `
+                    <div class="key-points">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 10L8 15L17 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            本步驟關鍵知識
+                        </h3>
+                        <ul>
+                            ${stage.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                // Show next button
+                nextBtnArea.innerHTML = `
+                    <div class="btn-container">
+                        <button class="btn" onclick="nextStage()">進入下一步驟 →</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Next Stage
+        function nextStage() {
+            currentStage++;
+            renderStage(currentStage);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Update Progress
+        function updateProgress(step, text) {
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const progressPercent = document.getElementById('progress-percent');
+
+            const percentage = (step / 8) * 100;
+            progressFill.style.width = `${percentage}%`;
+            progressText.textContent = text;
+            progressPercent.textContent = `${step}/8`;
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
