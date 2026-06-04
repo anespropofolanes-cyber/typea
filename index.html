@@ -1142,6 +1142,12 @@ function selectChoice(idx) {
                 <button class="btn" onclick="nextStage()">進入下一步驟 →</button>
             </div>
         `;
+    } else {
+        nextArea.innerHTML = `
+            <div class="btn-container">
+                <button class="btn" style="background:#6b7a8d;" onclick="renderStage(currentStage)">↩ 再試一次</button>
+            </div>
+        `;
     }
 }
 
