@@ -1092,6 +1092,7 @@ function renderStage(index) {
                         <h2>${stage.title}</h2>
                         <p>${stage.subtitle}</p>
                     </div>
+                    <button onclick="renderStage(0)" title="回首頁" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:0.78rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:6px;transition:background .2s;" onmouseover="this.style.background='var(--bg-secondary)'" onmouseout="this.style.background='none'">⌂ 首頁</button>
                 </div>
                 <div class="scenario">${stage.scenario}</div>
                 <div class="choices" id="choices">${choicesHTML}</div>
